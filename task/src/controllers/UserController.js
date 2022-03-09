@@ -22,12 +22,11 @@ import users from '../data/users.js';
 const formatUser = (title) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            let result = [];
-            users.map((user) => {
+            const results = users.map((user) => {
                 user.name = title + " " + user.name;
-                result.push(user);
+                return user;
             });
-            resolve(result);
+            resolve(results);
         }, 3000);
     });
 };
@@ -44,7 +43,7 @@ const findByName = (name) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             let result = users.find((user) => {
-                return user.name == `Mr/Mrs ${name}`;
+                return user.name = name;
             });
             resolve(result);
         }, 2000);
