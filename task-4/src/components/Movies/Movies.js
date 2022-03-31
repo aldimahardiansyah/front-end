@@ -1,12 +1,10 @@
 import styles from './Movies.module.css';
 import Movie from '../Movie/Movie';
-import data from '../../utils/constants/data';
-import { useState } from 'react';
 
-function Movies(){
-    // membuat state
-    const [movies, setMovies] = useState(data);
-    
+function Movies(props){
+    // destructing props
+    const {movies, setMovies} = props;
+
     function handleClick(){
         const movie = {
             id: "xyz",
