@@ -9,6 +9,10 @@ function AddMovieForm(props){
     const [title, setTitle] = useState("Spiderman");
     const [date, setDate] = useState(2013);
 
+    // state untuk error title dan date
+    const [isTitleError, setIsTitleError] = useState(false);
+    const [isDateError, setIsDateError] = useState(false);
+
     // buat  fungsi handleTitle
     function handleTitle(e) {
         setTitle(e.target.value);
@@ -21,15 +25,25 @@ function AddMovieForm(props){
     function handleSubmit(e){
         e.preventDefault();
 
-        const movie = {
-            id: nanoid(),
-            year: date,
-            poster: "https://picsum.photos/300/400",
-            title: title,
-            type: "movie"
-        }
+        // validasi form harus diisi
+        if(title === ''){
+            setIsTitleError(true);
+        } else if(date === ''){
+            setIsDateError(true);
+        } else {
+            const movie = {
+                id: nanoid(),
+                year: date,
+                poster: "https://picsum.photos/300/400",
+                title: title,
+                type: "movie"
+            }
+    
+            setMovies([...movies, movie]);
 
-        setMovies([...movies, movie]);
+            setIsTitleError(false);
+            setIsDateError(false);
+        }
     }
 
     return(
@@ -45,11 +59,17 @@ function AddMovieForm(props){
                     <div className={styles.form__control}>
                         <label htmlFor="title">Title</label>
                         <input id="title" type="text" className={styles.form__input} value={title} onChange={handleTitle}/>
+                        
+                        {/* jika isTitleError true, tampilkan teks*/}
+                        {isTitleError && <span>Title wajib diisi!</span>}
                     </div>
 
                     <div className={styles.form__control}>
                         <label htmlFor="year">Year</label>
                         <input id="year" type="number" className={styles.form__input} value={date} onChange={handleDate} />
+
+                        {/* jika isDateError true, maka tampilkan error */}
+                        {isDateError && <span>Tahun wajib diisi!</span>}
                     </div>
                     <button type="submit" className={styles.form__button}>Submit</button>
                 </form>
