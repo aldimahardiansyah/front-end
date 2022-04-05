@@ -1,6 +1,7 @@
 import styles from "./AddMovieForm.module.css";
 import React, {useState} from 'react';
 import { nanoid } from 'nanoid';
+import Alert from "../Alert/Alert";
 
 function AddMovieForm(props){
     const {movies, setMovies} = props;
@@ -61,7 +62,7 @@ function AddMovieForm(props){
                         <input id="title" type="text" className={styles.form__input} value={title} onChange={handleTitle}/>
                         
                         {/* jika isTitleError true, tampilkan teks*/}
-                        {isTitleError && <span>Title wajib diisi!</span>}
+                        {isTitleError && <Alert>Title Wajib diisi!</Alert>}
                     </div>
 
                     <div className={styles.form__control}>
@@ -69,7 +70,7 @@ function AddMovieForm(props){
                         <input id="year" type="number" className={styles.form__input} value={date} onChange={handleDate} />
 
                         {/* jika isDateError true, maka tampilkan error */}
-                        {isDateError && <span>Tahun wajib diisi!</span>}
+                        {isDateError && <Alert>Year wajib diisi!</Alert>}
                     </div>
                     <button type="submit" className={styles.form__button}>Submit</button>
                 </form>
