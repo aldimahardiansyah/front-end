@@ -13,8 +13,7 @@
 .form__right{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .form__right h2{
@@ -40,7 +39,7 @@ label{
     border: 1px solid #4361ee;
     border-radius: 6px;
     height: 2em;
-    padding: 1em;
+    padding: 0 1em;
 }
 
 .form__button{
