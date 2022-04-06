@@ -8,7 +8,6 @@ import data from "../utils/constants/data";
 
 function Home(){
     const [movies, setMovies] = useState(data);
-    console.log(movies);
 
     return(
         <div>
