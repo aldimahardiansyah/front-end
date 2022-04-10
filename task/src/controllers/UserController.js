@@ -22,10 +22,7 @@ import users from '../data/users.js';
 const formatUser = (title) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const results = users.map((user) => {
-                user.name = title + " " + user.name;
-                return user;
-            });
+            const results = users.map(user => user = {...user, name: `${title}. ${user.name}`});
             resolve(results);
         }, 3000);
     });
@@ -42,9 +39,7 @@ const formatUser = (title) => {
 const findByName = (name) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            let result = users.find((user) => {
-                return user.name = name;
-            });
+            const result = users.find(user => user.name == name);
             resolve(result);
         }, 2000);
     });
@@ -67,9 +62,7 @@ const findByName = (name) => {
 const filterByMajor = (major) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            let results = users.filter((user) => {
-                return user.major == major;
-            });
+            const results = users.filter(user =>  user.major == major);
             resolve(results);
         }, 4000);
     });
