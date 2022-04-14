@@ -6,20 +6,13 @@ import Alert from "../Alert/Alert";
 function AddMovieForm(props){
     const {movies, setMovies} = props;
 
-    // buat variable state input form
-    const [title, setTitle] = useState("Spiderman");
-    const [date, setDate] = useState(2013);
-    const [link, setLink] = useState('');
-    const [type, setType] = useState('');
-
-    // buat  fungsi handleTitle
-    function handleTitle(e) {
-        setTitle(e.target.value);
-    }
-
-    function handleDate(e){
-        setDate(e.target.value);
-    }
+    // membuat state object
+    const [formData, setFormData] = useState({
+        title: "",
+        date: "",
+        poster: "",
+        type: "",
+    });
 
     // state untuk error input form
     const [isTitleError, setIsTitleError] = useState(false);
@@ -27,33 +20,56 @@ function AddMovieForm(props){
     const [isLinkError, setIsLinkError] = useState(false);
     const [isTypeError, setIsTypeError] = useState(false);
 
-    function handleSubmit(e){
-        e.preventDefault();
+    // membuat fungsi handleChange untuk handle semua input form
+    function handleChange(e){
+        const {name, value} = e.target;
 
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    }
+
+    const {title, date, poster: link, type} = formData;
+
+    function validate(){
         // validasi form harus diisi
         if(title === ''){
             setIsTitleError(true);
+            return false;
         } else if(date === ''){
             setIsDateError(true);
+            return false
         } else if(link === ''){
             setIsLinkError(true);
+            return false;
         } else if(type === ''){
             setIsTypeError(true);
-        } else {
-            const movie = {
-                id: nanoid(),
-                year: date,
-                poster: link,
-                title: title,
-                type: type
-            }
-            setMovies([...movies, movie]);
-
+            return false;
+        } else{
             setIsTitleError(false);
             setIsDateError(false);
             setIsLinkError(false);
             setIsTypeError(false);
+            return true;
         }
+    }
+
+    function addMovie(){
+        const movie = {
+            id: nanoid(),
+            year: date,
+            poster: link,
+            title: title,
+            type: type
+        }
+        setMovies([...movies, movie]);
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+
+        validate() && addMovie();
     }
 
     return(
@@ -68,7 +84,7 @@ function AddMovieForm(props){
                 <form onSubmit={handleSubmit}>
                     <div className={styles.form__control}>
                         <label htmlFor="title">Title</label>
-                        <input id="title" type="text" className={styles.form__input} value={title} onChange={handleTitle}/>
+                        <input id="title" type="text" className={styles.form__input} value={title} onChange={handleChange} name="title"/>
                         
                         {/* jika isTitleError true, tampilkan teks*/}
                         {isTitleError && <Alert>Title Wajib diisi!</Alert>}
@@ -76,7 +92,7 @@ function AddMovieForm(props){
 
                     <div className={styles.form__control}>
                         <label htmlFor="year">Year</label>
-                        <input id="year" type="number" className={styles.form__input} value={date} onChange={handleDate} />
+                        <input id="year" type="number" className={styles.form__input} value={date} onChange={handleChange} name="date" />
 
                         {/* jika isDateError true, maka tampilkan error */}
                         {isDateError && <Alert>Year wajib diisi!</Alert>}
@@ -84,7 +100,7 @@ function AddMovieForm(props){
 
                     <div className={styles.form__control}>
                         <label htmlFor="link">Picture link</label>
-                        <input id="link" type="url" className={styles.form__input} value={link} onChange={(e)=>setLink(e.target.value)} />
+                        <input id="link" type="url" className={styles.form__input} value={link} onChange={handleChange} name="poster" />
 
                         {/* jika link kosong, maka tampilkan error */}
                         {isLinkError && <Alert>Picture wajib diisi!</Alert>}
@@ -92,7 +108,7 @@ function AddMovieForm(props){
 
                     <div className={styles.form__control}>
                         <label htmlFor="type">Type</label>
-                        <select name="type" id="type" className={styles.form__input} value={type} onChange={(e)=>setType(e.target.value)} >
+                        <select name="type" id="type" className={styles.form__input} value={type} onChange={handleChange} >
                             <option value="">-- Choose movie type --</option>
                             <option value="action">Action</option>
                             <option value="comedy">Comedy</option>
