@@ -15,10 +15,16 @@ function AddMovieForm(props){
     });
 
     // state untuk error input form
-    const [isTitleError, setIsTitleError] = useState(false);
-    const [isDateError, setIsDateError] = useState(false);
-    const [isLinkError, setIsLinkError] = useState(false);
-    const [isTypeError, setIsTypeError] = useState(false);
+    // const [isTitleError, setIsTitleError] = useState(false);
+    // const [isDateError, setIsDateError] = useState(false);
+    // const [isLinkError, setIsLinkError] = useState(false);
+    // const [isTypeError, setIsTypeError] = useState(false);
+    const [formError, setFormError] = useState({
+        isTitleError: false,
+        isDateError: false,
+        isLinkError: false,
+        isTypeError: false
+    });
 
     // membuat fungsi handleChange untuk handle semua input form
     function handleChange(e){
@@ -30,27 +36,45 @@ function AddMovieForm(props){
         });
     }
 
+    // destruct fromData
     const {title, date, poster: link, type} = formData;
 
+    // destruct formError
+    const {isTitleError, isDateError, isLinkError, isTypeError} = formError;
+
     function validate(){
-        // validasi form harus diisi
+        // validasi - form harus diisi
         if(title === ''){
-            setIsTitleError(true);
+            setFormError({
+                ...formError,
+                isTitleError: true
+            });
             return false;
         } else if(date === ''){
-            setIsDateError(true);
-            return false
+            setFormError({
+                ...formError,
+                isDateError: true
+            });
+            return false;
         } else if(link === ''){
-            setIsLinkError(true);
+            setFormError({
+                ...formError,
+                isLinkError: true
+            });
             return false;
         } else if(type === ''){
-            setIsTypeError(true);
+            setFormError({
+                ...formError,
+                isTypeError: true
+            });
             return false;
         } else{
-            setIsTitleError(false);
-            setIsDateError(false);
-            setIsLinkError(false);
-            setIsTypeError(false);
+            setFormError({
+                isTitleError: false,
+                isDateError: false,
+                isLinkError: false,
+                isTypeError: false
+            })
             return true;
         }
     }
