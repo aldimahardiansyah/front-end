@@ -16,7 +16,14 @@ const Button = styled.button`
     ${({full}) => full && css`
         display: block;
         width: 100%
-    `}
+    `};
+
+    font-size: ${({theme, size}) => theme.sizes.font_size[size] || theme.sizes.font_size.md}rem;
+    padding-top: ${({theme, size}) => theme.sizes.padding_y[size] || theme.sizes.padding_y.md}rem;
+    padding-bottom: ${({theme, size}) => theme.sizes.padding_y[size] || theme.sizes.padding_y.md}rem;
+    padding-left: ${({theme, size}) => theme.sizes.padding_x[size] || theme.sizes.padding_x.md}rem;
+    padding-right: ${({theme, size}) => theme.sizes.padding_x[size] || theme.sizes.padding_x.md}rem;
+
 `;
 
 export default Button;
