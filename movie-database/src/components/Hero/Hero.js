@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import styles from "./Hero.module.css";
 import Button from "../ui/Button";
+import HeroStyled from "./Hero.styled";
 
 function Hero(){
     // destruct movie state
@@ -16,19 +16,19 @@ function Hero(){
     }, []);
 
     return (
-        <div className={styles.container}>
-            <section className={styles.hero}>
-                <div className={styles.hero__left}>
-                    <h2 className={styles.hero__title}>{movie.Title}</h2>
-                    <h3 className={styles.hero__genre}>Genre: {movie.Genre}</h3>
-                    <p className={styles.hero__description}>{movie.Plot}</p>
+        <HeroStyled>
+            <section>
+                <div className="hero__left">
+                    <h2>{movie.Title}</h2>
+                    <h3>Genre: {movie.Genre}</h3>
+                    <p>{movie.Plot}</p>
                     <Button variant="secondary">Watch Movie</Button>
                 </div>
-                <div className={styles.hero__right}>
-                    <img className={styles.hero__image} src={movie.Poster} alt="" />
+                <div className="hero__right">
+                    <img src={movie.Poster} alt="" />
                 </div>
             </section>
-        </div>
+        </HeroStyled>
     );
 }
 
