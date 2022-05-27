@@ -3,7 +3,7 @@ import Movie from '../Movie/Movie';
 
 function Movies(props){
     // destructing props
-    const {movies, setMovies, title} = props;
+    const {movies, setMovies, title, iteration = false} = props;
 
     function handleClick(){
         const movie = {
@@ -25,7 +25,7 @@ function Movies(props){
                 <div className={styles.movie__container}>
                     {/* looping: map */}
                     {
-                        movies.map((movie) => <Movie movie={movie} key={movie.id}/>)
+                        movies.map((movie, i) => <Movie movie={movie} iteration={iteration && i+1} key={movie.id}/>)
                     }
                 </div>
 

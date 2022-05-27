@@ -7,7 +7,7 @@ function Movie(props){
     return (
         <StyledMovie>
             <img src={poster || `https://image.tmdb.org/t/p/w300/${poster_path}`} alt="" />
-            <h3>{title}</h3>
+            <h3>{props.iteration && props.iteration + '.'} {title}</h3>
             <p>{year || release_date}</p>
         </StyledMovie>
     );
