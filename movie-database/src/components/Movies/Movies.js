@@ -3,7 +3,7 @@ import Movie from '../Movie/Movie';
 
 function Movies(props){
     // destructing props
-    const {movies, setMovies} = props;
+    const {movies, setMovies, title} = props;
 
     function handleClick(){
         const movie = {
@@ -20,7 +20,7 @@ function Movies(props){
     return(
         <div className={styles.container}>
             <section className={styles.movies}>
-                <h2 className={styles.movies__title}>Latest Movies</h2>
+                <h2 className={styles.movies__title}>{title}</h2>
 
                 <div className={styles.movie__container}>
                     {/* looping: map */}

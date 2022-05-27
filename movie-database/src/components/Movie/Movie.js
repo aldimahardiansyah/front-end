@@ -2,13 +2,13 @@ import StyledMovie from "./Movie.styled";
 
 function Movie(props){
     // destructing object
-    const {title, year, poster} = props.movie;
+    const {title, year, poster, release_date, poster_path} = props.movie;
     
     return (
         <StyledMovie>
-            <img src={poster} alt="" />
+            <img src={poster || `https://image.tmdb.org/t/p/w300/${poster_path}`} alt="" />
             <h3>{title}</h3>
-            <p>{year}</p>
+            <p>{year || release_date}</p>
         </StyledMovie>
     );
 }
