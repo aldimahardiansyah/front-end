@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ENDPOINTS from "../../utils/constants/endpoints";
 import Button from "../ui/Button";
 import HeroStyled from "./Hero.styled";
 
@@ -11,11 +12,8 @@ function Hero(){
     const trailer = movie && `https://www.youtube.com/watch?v=${movie.videos.results[0].key}`
     const genres = movie && movie.genres.map(genre=>genre.name).join(", ");
 
-    const API_KEY = process.env.REACT_APP_API_KEY;
-
     async function getTrandingMovies(){
-        const URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
-        const response = await axios(URL);
+        const response = await axios(ENDPOINTS('trending'));
         return response.data.results[0];
     }
 
@@ -25,9 +23,7 @@ function Hero(){
         const id = trandingMovie.id;
 
         // fetch detail movie by id
-        const URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos`;
-
-        const response = await axios(URL);
+        const response = await axios(ENDPOINTS('detail', id));
 
         setMovie(response.data);
 
