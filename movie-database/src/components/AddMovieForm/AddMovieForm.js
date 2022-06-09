@@ -3,9 +3,16 @@ import React, {useState} from 'react';
 import { nanoid } from 'nanoid';
 import Alert from "../Alert/Alert";
 import Button from "../ui/Button";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addMovie } from "../../features/moviesSlice";
 
 function AddMovieForm(props){
+    // buat dispatch: untuk menjalankan action
+    const dispatch = useDispatch();
+
     const {movies, setMovies} = props;
+    const navigation = useNavigate();
 
     // membuat state object
     const [formData, setFormData] = useState({
@@ -80,7 +87,7 @@ function AddMovieForm(props){
         }
     }
 
-    function addMovie(){
+    function postMovie(){
         const movie = {
             id: nanoid(),
             year: date,
@@ -89,12 +96,18 @@ function AddMovieForm(props){
             type: type
         }
         setMovies([...movies, movie]);
+
+        // jalankan action addmovie menggunakan dispatch
+        dispatch(addMovie(movie));
+
+        // redirect ke home
+        navigation('/');
     }
 
     function handleSubmit(e){
         e.preventDefault();
 
-        validate() && addMovie();
+        validate() && postMovie();
     }
 
     return(
