@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Hero from "../../components/Hero/Hero";
 import Movies from "../../components/Movies/Movies";
