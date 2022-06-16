@@ -28,7 +28,7 @@ function ENDPOINTS(endpoint, movieId = ''){
     } 
     
     else if(endpoint === 'trending'){
-        return `${BASE_URL}/trending/movie/week?api_key=${API_KEY}`
+        return `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
     } 
     
     else if(endpoint === 'detail'){
