@@ -3,10 +3,12 @@ import axios from "axios";
 import Movies from "../../components/Movies/Movies";
 import Hero from "../../components/Hero/Hero";
 import ENDPOINTS from "../../utils/constants/endpoints";
+import { useDispatch } from "react-redux";
+import { updateMovies } from "../../features/moviesSlice";
 
 function PopularMovie(){
-    // membuat state movies
-    const [movies, setMovies] = useState([]);
+    // buat dispatch: untk trigger action
+    const dispatch = useDispatch();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
@@ -19,13 +21,13 @@ function PopularMovie(){
         const res = await axios(ENDPOINTS('popular'));
         
         // simpan data ke state movie
-        setMovies(res.data.results);
+        dispatch(updateMovies(res.data.results))
     }
 
     return (
         <div>
             <Hero />
-            <Movies movies={movies} title='Popular Movies'/>
+            <Movies title='Popular Movies'/>
         </div>
     );
 }
