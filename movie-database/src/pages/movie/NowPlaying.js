@@ -18,7 +18,7 @@ function NowPlaying(){
     }, []);
 
     const getPopularMovies = async () => {
-        const res = await axios(ENDPOINTS('now_playing'));
+        const res = await axios(ENDPOINTS.NOW_PLAYING);
         
         dispatch(updateMovies(res.data.results));
     }

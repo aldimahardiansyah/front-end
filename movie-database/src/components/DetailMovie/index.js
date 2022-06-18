@@ -61,7 +61,7 @@ function DetailMovie(){
     }, [params.id]);
 
     async function getDetailMovie(){
-        const response = await axios(ENDPOINTS('detail', params.id));
+        const response = await axios(ENDPOINTS.DETAIL(params.id));
     
         // set hasil data dari axios ke state movie
         setMovie(response.data);
@@ -70,7 +70,7 @@ function DetailMovie(){
     return (
         <StyledDetailMovie>
             <div className="poster">
-                <img src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt="" />
+                {movie !== "" && <img src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt="" />}
             </div>
             <div className="info">
                 <h2>{movie.title}</h2>

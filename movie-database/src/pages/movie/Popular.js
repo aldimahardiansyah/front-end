@@ -18,7 +18,7 @@ function PopularMovie(){
     }, []);
 
     const getPopularMovies = async () => {
-        const res = await axios(ENDPOINTS('popular'));
+        const res = await axios(ENDPOINTS.POPULAR);
         
         // simpan data ke state movie
         dispatch(updateMovies(res.data.results))

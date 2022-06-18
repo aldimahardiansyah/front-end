@@ -18,7 +18,7 @@ function ToptRatedMovie(){
     }, []);
 
     const getTopRatedMovies = async () => {
-        const res = await axios(ENDPOINTS('top_rated'));
+        const res = await axios(ENDPOINTS.TOP_RATED);
         
         dispatch(updateMovies(res.data.results));
     }

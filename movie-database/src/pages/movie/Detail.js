@@ -19,7 +19,7 @@ function Detail (){
     }, [id]);
 
     async function getRecommendationMovies(){
-        const response = await axios(ENDPOINTS('recommendation', id));
+        const response = await axios(ENDPOINTS.RECOMMENDATIONS(id));
 
         dispatch(updateMovies(response.data.results))
     }

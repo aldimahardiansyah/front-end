@@ -13,7 +13,7 @@ function Hero(){
     const genres = movie && movie.genres.map(genre=>genre.name).join(", ");
 
     async function getTrandingMovies(){
-        const response = await axios(ENDPOINTS('trending'));
+        const response = await axios(ENDPOINTS.TRENDING);
         return response.data.results[0];
     }
 
@@ -23,7 +23,7 @@ function Hero(){
         const id = trandingMovie.id;
 
         // fetch detail movie by id
-        const response = await axios(ENDPOINTS('detail', id));
+        const response = await axios(ENDPOINTS.DETAIL(id));
 
         setMovie(response.data);
 
@@ -41,7 +41,7 @@ function Hero(){
                     <Button as="a" href={trailer} target='_blank' variant="secondary" size="lg">Watch Movie</Button>
                 </div>
                 <div className="hero__right">
-                    <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="" />
+                    {movie && <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="" />}
                 </div>
             </section>
         </HeroStyled>
